@@ -28,7 +28,7 @@ services:
       - DATABASE_URL=${AUTH_DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
 
-   products-ms:
+  products-ms:
      build: ./products-ms
      volumes:
        - ./products-ms/src:/usr/src/app/src
@@ -38,7 +38,7 @@ services:
        - NATS_SERVERS=nats://nats-server:4222
        - DATABASE_URL=file:./dev.db
 
-   orders-ms:
+  orders-ms:
      depends_on:
        - orders-db
      build: ./orders-ms
@@ -50,7 +50,7 @@ services:
        - DATABASE_URL=postgresql://postgres:123456@orders-db:5432/ordersdb?schema=public
        - NATS_SERVERS=nats://nats-server:4222
 
-   orders-db:
+  orders-db:
      container_name: orders_database
      image: postgres:16.2
      restart: always
@@ -66,7 +66,7 @@ services:
   # =====================
   # Payments Microservice
   # =====================
-   payments-ms:
+  payments-ms:
      container_name: payments-ms
      build: ./payments-ms
      volumes:
